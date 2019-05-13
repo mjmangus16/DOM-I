@@ -83,6 +83,14 @@ navItems.forEach(nav => (nav.style.color = "green"));
 ctaText.children[0].textContent = siteContent.cta.h1;
 ctaText.children[1].textContent = siteContent.cta.button;
 
+const headline = ctaText.children[0];
+const button = ctaText.children[1];
+
+button.addEventListener("click", () => {
+  const colors = ["green", "yellow", "red", "blue"];
+  headline.style.color = colors[Math.round(Math.random() * 3)];
+});
+
 ctaImg.src = siteContent.cta["img-src"];
 middleImg.src = siteContent["main-content"]["middle-img-src"];
 
