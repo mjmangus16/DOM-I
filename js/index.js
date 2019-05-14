@@ -48,14 +48,12 @@ logo.setAttribute("src", siteContent["nav"]["img-src"]);
 
 const nav = document.querySelector("nav");
 
-console.log(nav);
-
 const aTag2 = document.createElement("a");
 nav.appendChild(aTag2);
 aTag2.textContent = "NavItem 2";
 aTag2.href = "#";
 
-const navItems = document.querySelectorAll("a");
+let navItems = document.querySelectorAll("nav > a");
 
 const ctaText = document.querySelector(".cta-text");
 const ctaImg = document.querySelector("#cta-img");
@@ -76,8 +74,8 @@ const aTag1 = document.createElement("a");
 nav.prepend(aTag1);
 aTag1.textContent = "NavItem 1";
 aTag1.href = "#";
-aTag1.style.color = "green";
 
+navItems = document.querySelectorAll("nav > a");
 navItems.forEach(nav => (nav.style.color = "green"));
 
 ctaText.children[0].textContent = siteContent.cta.h1;
@@ -87,39 +85,39 @@ const headline = ctaText.children[0];
 const button = ctaText.children[1];
 
 button.addEventListener("click", () => {
-  const colors = ["green", "yellow", "red", "blue"];
-  headline.style.color = colors[Math.round(Math.random() * 3)];
+  const colors = ["green", "yellow", "red", "blue", "lightBlue", "orange"];
+  headline.style.color = colors[Math.round(Math.random() * colors.length)];
 });
 
-ctaImg.src = siteContent.cta["img-src"];
-middleImg.src = siteContent["main-content"]["middle-img-src"];
+// ctaImg.src = siteContent.cta["img-src"];
+// middleImg.src = siteContent["main-content"]["middle-img-src"];
 
-textContents[0].children[0].textContent =
-  siteContent["main-content"]["features-h4"];
+// textContents[0].children[0].textContent =
+//   siteContent["main-content"]["features-h4"];
 
 textContents[0].children[1].textContent =
   siteContent["main-content"]["features-content"];
 
-textContents[1].children[0].textContent =
-  siteContent["main-content"]["about-h4"];
+// textContents[1].children[0].textContent =
+//   siteContent["main-content"]["about-h4"];
 
 textContents[1].children[1].textContent =
   siteContent["main-content"]["about-content"];
 
-textContents[2].children[0].textContent =
-  siteContent["main-content"]["services-h4"];
+// textContents[2].children[0].textContent =
+//   siteContent["main-content"]["services-h4"];
 
 textContents[2].children[1].textContent =
   siteContent["main-content"]["services-content"];
 
-textContents[3].children[0].textContent =
-  siteContent["main-content"]["product-h4"];
+// textContents[3].children[0].textContent =
+//   siteContent["main-content"]["product-h4"];
 
 textContents[3].children[1].textContent =
   siteContent["main-content"]["product-content"];
 
-textContents[4].children[0].textContent =
-  siteContent["main-content"]["vision-h4"];
+// textContents[4].children[0].textContent =
+//   siteContent["main-content"]["vision-h4"];
 
 textContents[4].children[1].textContent =
   siteContent["main-content"]["vision-content"];
@@ -131,3 +129,35 @@ contact.children[3].textContent = siteContent.contact.email;
 
 const footer = (document.querySelector("footer").children[0].textContent =
   siteContent.footer.copyright);
+
+let array = [];
+
+// Loop through each key in siteContent["main-content"]. If the key includes "h4" in it, then we push it into an array
+for (let i = 0; i < Object.keys(siteContent["main-content"]).length; i++) {
+  if (Object.keys(siteContent["main-content"])[i].includes("h4")) {
+    array.push(Object.keys(siteContent["main-content"])[i]);
+  }
+}
+
+// Grabs all the h4 tags inside .main-content
+let h4s = document.querySelectorAll(".main-content h4");
+console.log(h4s);
+
+// Fill the text content of each h4 tag. As we loop through each tag, we use the index # we get from forEach to select each key name from the array. Each key name is used to select that value for the siteContent["main-content"] object
+h4s.forEach(
+  (h4, i) => (h4.textContent = siteContent["main-content"][array[i]])
+);
+
+console.log(Object.keys(siteContent.nav)[0]);
+console.log(array);
+
+let array2 = [];
+
+for (let i = 0; i < Object.keys(siteContent["main-content"]).length; i++) {
+  array2.push({
+    key: Object.keys(siteContent["main-content"])[i],
+    value: Object.values(siteContent["main-content"])[i]
+  });
+}
+
+console.log(array2);
